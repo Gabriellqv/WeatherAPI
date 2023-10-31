@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Previsão do Tempo",
+    "version": "1.0.0",
+    "description": "API para obter informações de previsão do tempo",
+    "contact": {
+      "name": "Gabriel Queiroz",
+      "email": "gabriellqv@gmail.com"
+    }
+  },
+  "paths": {
+    "/register": {
+      "get": {
+        "summary": "Rota para a página de registro",
+        "responses": {
+          "200": {
+            "description": "Página de registro carregada com sucesso"
+          }
+        }
+      },
+      "post": {
+        "summary": "Rota para processar o formulário de registro",
+        "requestBody": {
+          "description": "Dados de registro do usuário",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registro do usuário concluído com sucesso"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "delete": {
+        "summary": "Rota para deletar um usuário",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário deletado com sucesso"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/weather/{latitude}/{longitude}": {
+      "get": {
+        "summary": "Rota para obter informações de previsão do tempo",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Previsão do tempo obtida com sucesso"
+          },
+          "401": {
+            "description": "Chave API inválida"
+          },
+          "500": {
+            "description": "Erro ao buscar previsão do tempo"
+          }
+        }
+      }
+    }
+  }
+}
